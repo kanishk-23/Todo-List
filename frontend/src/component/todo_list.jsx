@@ -38,10 +38,9 @@ function TodoList(){
     };
 
     return (
-		<div className="max-h-screen flex-col items-center justify-items-center align-middle">
-			<div className="w-full">
-				<Navbarcomp/>
-			</div>
+		<div className="w-full">
+			<Navbarcomp/>
+			<div className="max-h-screen max-w-[1440px] mx-auto px-2 flex-col items-center justify-items-center align-middle">
 			<div className="w-full h-[70vh] flex flex-row items-center justify-center align-middle gap-4">
 				{/* ACTIVE TASK */}
 				<div className="w-[320px] flex-1 flex flex-col h-full bg-white rounded-lg p-4 shadow-lg">
@@ -147,6 +146,7 @@ function TodoList(){
 					)}
 				</Modal>
 			)}
+		</div>
 		</div>
     );
 }

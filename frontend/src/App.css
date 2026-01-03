@@ -1,10 +1,9 @@
 body{
   padding: 0;
   margin: 0;
-  display: grid;
   justify-content: center;
   align-items: center;
-  background-color: #000f4c;
+  background-color: #c4d8ff;
   color: rgb(0, 31, 31);
 }
 
