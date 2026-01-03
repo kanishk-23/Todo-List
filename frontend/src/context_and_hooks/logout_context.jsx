@@ -1,4 +1,3 @@
-import React from "react";
 import { useAuthcontext } from "./auth_context";
 import { useTodocontext } from "./todo_context";
 export const useLogout=()=>{

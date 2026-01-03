@@ -1,4 +1,3 @@
-import React from "react";
 function Modal({ children, onClose }) {
   return (
     <div

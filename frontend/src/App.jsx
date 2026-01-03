@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "./login/loginpage";
 import './App.css';
@@ -9,7 +8,6 @@ import { useAuthcontext } from "./context_and_hooks/auth_context";
 function App() {
   const ProtectedRoute = ({children}) =>{
     const { state } = useAuthcontext();
-    // console.log(user);
     return state?.user ? children : <Navigate to='/login' replace />;
   };
 

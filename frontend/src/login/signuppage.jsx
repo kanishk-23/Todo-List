@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSignup } from "../context_and_hooks/signup_context";
 import { MdMeetingRoom } from "react-icons/md";

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {useTodocontext}  from "../context_and_hooks/todo_context";
 import {todoService} from "../service/api_service";
 import {FaEye, FaEdit, FaTrash, FaArrowRight, FaArrowLeft} from 'react-icons/fa';

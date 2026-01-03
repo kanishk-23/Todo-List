@@ -1,4 +1,3 @@
-import React from "react";
 import { useTodocontext } from "../context_and_hooks/todo_context";
 
 function Viewform({onClose}){
