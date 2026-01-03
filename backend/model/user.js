@@ -15,21 +15,30 @@ user.statics.findByEmailOrUsername = function (email_username) {
 
 user.statics.signup = async function(email, username, password) {
   if (!email || !username || !password)    throw new Error('All fields are required.');
-  
+
   if(!validator.isEmail(email))  throw Error('Email is not valid.')
   const email_exists = await this.findOne({email});
   if(email_exists)  throw Error('Email already exists!');
-  
+
   const username_exists = await this.findOne({username});
   if(username_exists)  throw Error('Username already exists!');
 
   if(!validator.isStrongPassword(password))  throw Error('Password is not strong. Enter a new password')
-  
+
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password,salt);
-
   const user = await this.create({email, username, password:hash})
   return user;
 }
 
-module.exports = mongoose.model('User',user)
+user.statics.login = async function(email, password){
+  if (!email || !password)    throw new Error('All fields are required.');
+  if(!validator.isEmail(email))    throw Error('Email is not valid.');
+  const user = await this.findOne({email});
+  if(!user) throw Error('No user found');
+  const match = await bcrypt.compare(password, user.password);
+  if(!match)  throw Error('Incorrect details');
+  return user;
+}
+
+module.exports = mongoose.model('User',user);

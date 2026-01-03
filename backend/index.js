@@ -1,5 +1,5 @@
-const todoroutes = require('./routes/todoroutes');
-// const userroutes = require('./routes/userroutes');
+const todoRoutes = require('./routes/todoroutes');
+const userRoutes = require('./routes/userroutes');
 const DBconnection = require('./databaseconnection');
 const express= require('express')
 const app = express();
@@ -14,8 +14,8 @@ app.use(cors({origin: `*`}));
 // const bcrypt = require('bcryptjs');
 
 // Using routes
-app.use('/api/todos', todoroutes);
-// app.use('/api/users'.userroutes);
+app.use('/api/user', userRoutes);
+app.use('/api/todos', todoRoutes);
 
 // root route
 app.get('/', (req, res) => {

@@ -1,11 +1,6 @@
 import React from "react";
 import { createContext, useReducer, useContext } from "react";
 export const todocontext= createContext();
-export function useTodocontext(){
-    const context= useContext(todocontext);
-    if(!context) throw new Error("useTodocontext should be in provider");
-    return context;
-}
 
 const initialState = {
     todos:[],
@@ -24,8 +19,6 @@ export const todoreducer = (state, action)=>{
             return {...state, loading: false, error: action.payload};
         case 'LoadingSuccessful':
             return {...state, loading: false, todos: action.payload, error: ''};
-        // case 'UpdateForm':
-        //     return {...state, form: {...state.form, ...action.payload}};
         case 'AddTodo':
             return {...state, loading: false, todos: [...state.todos, action.payload], error: ''};
         case 'UpdateTodo':
@@ -36,11 +29,12 @@ export const todoreducer = (state, action)=>{
             return {...state, modalOpen: true, modalMode: action.payload.mode, activeTodo: action.payload.todo, loading: false};
         case 'CloseModal':
             return {...state, modalOpen: false, modalMode: '', activeTodo: '', error: ''};
+        case 'Clear':
+            return {...state, todos:[], loading: false, error:''};
         default:
             return state;
-    }
-}
-
+        }}
+        
 export function TodoProvider({children}){
     const [state,dispatch] = useReducer(todoreducer, initialState);
     return(
@@ -49,4 +43,9 @@ export function TodoProvider({children}){
         </todocontext.Provider>
     )
 }
-
+// hook
+export function useTodocontext(){
+    const context= useContext(todocontext);
+    if(!context) throw new Error("useTodocontext should be in provider");
+    return context;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useTodocontext } from "../context/todo_context";
-import { updateTodo } from "../service/todo_service";
+import { useTodocontext } from "../context_and_hooks/todo_context";
+import {todoService} from "../service/api_service";
 
 function Editform({onClose}){
     const {state, dispatch} = useTodocontext();
@@ -20,7 +20,7 @@ function Editform({onClose}){
         if(!form.task ||!form.start_date ||!form.due_date){
             dispatch({type:"LoadError", payload:error});
         }
-        updateTodo(activeTodo._id, form).then(res=> {
+        todoService.updateTodo(activeTodo._id, form).then(res=> {
             dispatch({type:"UpdateTodo",payload: res.data.data});
             setform({task: "", start_date: "", due_date: ""});
         })
@@ -57,10 +57,8 @@ function Editform({onClose}){
                 </div>
             </div>
             <div className="flex gap-2 border-t border-gray-200 pt-3">
-                <button onClick={onClose} className="flex-1 rounded-sm py-2 border-none text-sm font-medium text-blue-600 bg-white" // hover:bg-blue-50"
-                >Cancel</button>
-                <button onClick={onSubmit} className="flex-1 rounded-sm py-2 border-none text-sm font-medium text-blue-600 bg-white" // hover:bg-blue-50"
-                >Save</button>
+                <button onClick={onClose} className="flex-1 rounded-sm py-2 border-none text-sm font-medium text-blue-600 bg-white shadow-md">Cancel</button>
+                <button onClick={onSubmit} className="flex-1 rounded-sm py-2 border-none text-sm font-medium text-blue-600 bg-white shadow-md">Save</button>
             </div>
         </div>
         </>

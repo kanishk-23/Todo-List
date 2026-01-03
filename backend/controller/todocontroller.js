@@ -2,7 +2,7 @@ const Todo = require("../model/todo");
 
 const getAllTodos = async (req, res) => {
     try{
-        const todos = await Todo.find();
+        const todos = await Todo.find({email: req.user.email});
         res.status(200).json({success:true, data:todos});
     }
     catch(err){
@@ -10,22 +10,26 @@ const getAllTodos = async (req, res) => {
     }
 };  
 
-const getTodo = async (req, res) => {
-    try{
-        const {id} = req.params;
-        const todo = await todo.findById(id);
-        res.status(200).json({success:true, data:todo});
-    }
-    catch(err){
-        res.status(400).json({success:false, message:'Server error'});
-    }
-};
+// const getTodo = async (req, res) => {
+//     try{
+//         const {id} = req.params;
+//         const todo = await Todo.findById(id);
+//         res.status(200).json({success:true, data:todo});
+//     }
+//     catch(err){
+//         res.status(400).json({success:false, message:'Server error'});
+//     }
+// };
 
 const createNewTodo = async (req, res) => {
     try{
+        email = req.user.email;
         const data = req.body;
+
         // basic validation
+        data.task = data.task.trim();
         if(!data.task || !data.start_date || !data.due_date) throw new Error("All the fields are required");
+
         // date parsing
         start_date = new Date(data.start_date)
         due_date = new Date(data.due_date)
@@ -39,8 +43,8 @@ const createNewTodo = async (req, res) => {
         const current_date = new Date();
         current_date.setHours(0, 0, 0, 0);
         const is_active = !(due_date< current_date);
-
         const newtodo = new Todo({
+            email:email,
             task: data.task,
             start_date: start_date,
             due_date: due_date,
@@ -66,7 +70,7 @@ const updateTodo = async (req, res) => {
         // fetching task details
         const todo = await Todo.findById(id);
         if(!todo) return res.status(400).json({success:false, message:'Task not found'});
-        if ('task' in data) todo.task = data.task;
+        if ('task' in data) todo.task = data.task.trim();
         // date parsing
         if ('start_date' in data || 'due_date' in data) {
             const new_start_date = 'start_date' in data ? new Date(data.start_date) : todo.start_date;
@@ -107,7 +111,7 @@ const deleteTodo = async (req, res) => {
 
 module.exports = {
   getAllTodos,
-  getTodo,
+//   getTodo,
   createNewTodo,
   updateTodo,
   deleteTodo,

@@ -4,6 +4,17 @@ body{
   display: grid;
   justify-content: center;
   align-items: center;
-  background-color: #dbf9ff;
+  background-color: #000f4c;
   color: rgb(0, 31, 31);
+}
+
+.scroll-hide{
+  scrollbar-width: none;
+}
+
+button{
+  padding: 4px;
+}
+button:hover{
+ background-color: #f3f3f3;
 }

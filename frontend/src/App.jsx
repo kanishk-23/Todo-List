@@ -1,25 +1,30 @@
 import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import LoginPage from "./login/loginpage";
 import './App.css';
-import { useEffect } from 'react';
-import { useTodocontext } from './context/todo_context';
-import { getTodos } from './service/todo_service';
 import Todolist from'./component/todo_list';
+import SignupPage from "./login/signuppage";
+import { useAuthcontext } from "./context_and_hooks/auth_context";
 
 function App() {
-  const {state, dispatch} = useTodocontext();
-  useEffect(()=>{
-    dispatch({type: 'LoadingStart'})   
-    getTodos()
-    .then(res => dispatch({type: 'LoadingSuccessful', payload: res.data.data}))
-    .catch(res => dispatch({type: 'LoadError', payload: res.response?.data?.message || 'Server Error', }));
-  },[dispatch]);
+  const ProtectedRoute = ({children}) =>{
+    const { state } = useAuthcontext();
+    // console.log(user);
+    return state?.user ? children : <Navigate to='/login' replace />;
+  };
 
   return (
-    <>
-    <div>
-      <Todolist/>
+    <div className="w-full h-screen flex justify-center align-center">
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Navigate to= "/login" replace/>}/>
+          <Route path='/login' element={<LoginPage/>}/>
+          <Route path='/signup' element={<SignupPage/>}/>
+          <Route path='/todos' element={<ProtectedRoute><Todolist/></ProtectedRoute>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
-    </>
+    
   );
 }
 
