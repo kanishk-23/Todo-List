@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuthcontext } from "./auth_context";
 import { useNavigate } from "react-router-dom";
+const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:4000';
 
 export const useLogin=()=>{
     const [error, setError] = useState("");
