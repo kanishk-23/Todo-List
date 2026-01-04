@@ -9,7 +9,7 @@ export const useSignup=()=>{
     const navigate = useNavigate();
     const signup= async (email, username, password)=>{
         setLoading(true);
-        const response = await fetch('http://localhost:4000/api/user/signup',{
+        const response = await fetch(`${BASE_URL}/api/user/signup`,{
             method:'POST',
             headers: {'Content-type':'application/json'},
             body: JSON.stringify({email, username, password})

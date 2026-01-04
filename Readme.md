@@ -7,7 +7,8 @@ now design the model then design how controller works and then on routes now con
 
 
 # for Frontend:-
-npx create-react-app frontend
+npm create vite@latest frontend -- --template react
 cd frontend
 npm i axios
-npm start
+npm run dev
+now design the frontend and work on authentication and connect with backend.
