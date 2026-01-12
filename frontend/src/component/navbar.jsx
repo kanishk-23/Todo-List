@@ -20,7 +20,7 @@ function Navbarcomp(){
     }
 
     return (
-        <div className="grid grid-cols-2 justify-between items-center p-4 text-white mb-6 bg-blue-500">
+        <div className="grid grid-cols-2 justify-between items-center p-4 text-white bg-blue-500">
             <div>
                 <p className="text-left text-5xl font-semibold">Todo List</p>
             </div>
