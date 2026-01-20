@@ -12,3 +12,9 @@ cd frontend
 npm i axios
 npm run dev
 now design the frontend and work on authentication and connect with backend.
+
+
+# Environment variables
+frontend:- VITE_BASE_URL 
+        
+backend:- PORT, MONGO_URI, FRONTEND, SECRET
